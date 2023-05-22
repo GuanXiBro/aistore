@@ -1,0 +1,38 @@
+#端口号
+server:
+  port: 9090
+
+
+#配置数据源
+spring:
+  prifiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/aistore?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false
+    username: root
+    password: "070600"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#配置mybatis
+#mybatis:
+#  mapper-locations: classpath:/mybatis/mapper/*.xml
+#  type-aliases-package: com.ai.th.pojo
+
+#配置mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:/mybatis/mapper/*.xml
+  type-aliases-package: com.ai.th.pojo
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+files:
+  upload:
+    path: D:\ideaWorkspace\springboot\aistore\files\
+
+
+#配置支付宝沙箱
+alipay:
+  appId: 2021000122691835
+  appPrivateKey: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCXXiz5alzYXqMepePHpoh65guj2qkk/v7MY1BbW0YhutB6lXcfxAghb+fwFvlG4KnEe5fVdySFOZ6fVyFc9cbKK7BwQxCBigFf3byU43xfTn+EuR5uHq+ZWMugOtNkuXYinjBmFxcaYQX/bMaE6z1JkJCaNGAMq3DMfMWgef5hXlWj+eu+cJfC1iHYEtqiYCB9k97tWZ6nzSdCd4+MUhcU2/5cTNSHSKOpUlJR5nmWUB9OyKKMMzSiQ6vo/FJfWGpBriFgQJCWdHt+RdDp9bOwjFYGnPj3CohE9wS3wIKMBXmc3LEhvIi9NN7miF46v3KvsfvwqruwjOPZN56B28CpAgMBAAECggEAebKy8BjO6vszpMl1WCiRZFYel6+O/HqzuvpCOiEpQqcjRNt0uipu6wtA7CxcYNryQ1GnIm43A5Hu8WcpIMdN+2+i3K9ezvd44W2yV/aKIUpIhhob2Cd9wQm+NWX2Xe4qh+ytNvdrkL7fBpybA3TqgoHjcMeZTbZs60uJzNsoZXko3YkHvYsmyu9WdM2FUbyE2wmTe9Pglaj3Q1EDG/LjQ3SIdWBoD+AvSIETlsbs5uSR9KSvuU1Q0cALrqejIli/5C2IneRSDWxluvQot6u5hTqiFOZGzyE2NMasx1M17VaAhribCJJCExZfIvkwBnCz2mkd3rkMxzzMI8BcWfeG8QKBgQDPts+5vyp5RaxUsXVrcZwaHgEGSomeG/oqVXi0p4NP2iWrRdD6lrOVeWaWeGixBdrmpx3NRQrhbfLxKunC6mM7AJPCr0zMzvnOUmlqfbQAJukt53tIg0rxkrJHRg331s9CYSbQImYYXpAgq9mnq8wemijxdofcHZCEkD0AOY1TdQKBgQC6jiqzAeNoMnBOZXg954s4m5CAfGn2K6+iCUGUb4/jet1yHCFKlUPoYTatCWORhyWNV7ogPXM0L/F+4Jc34djr5C/MA/STj0iPZExIl6kUciBQvvSfg209dIlsEaFMOEcg/+WKyD7bgM00Jgg+7xFcxAdt0Kgz/8oaq6NuhsmV5QKBgAVTGmAYlm4laxWAtxHaB7ZjroMKxhxXe0I6jq2S3breTLjnQUQrOM9MHWUeERD4pXPkNM9eRbkhqGimQPfOKl0I1sDW3ZEifSTc1/by4fpfBPs4Q+DH/NPUft103kbMKuP4uZX8S8G0Kt2rihjSPplKOmJ2N2VdHKdJS0cGMqlBAoGAfJ00doh/X/25ORTcofVF8RUxDDKPEUoTMtid/soawmgy/eM+dbSJPPOa8zD/Wpl9AxIjmR+TEbwow4jAWiq5nLC7ILtPpzWh0W686gyse6TUYzt66gZ/dPqgRRjttp0tHiTxLqgeHL/H0trIzUkiPuYO1FL52Go3lWMrc0wD4eUCgYEAjAVIsz6WWrgQ602Jung8MiJ9Fc7QEvAPmdHsWfSYKf95cSF7/O+rs1xL+n+pmKik2FYYQuACIQnJUDSYpxMVu9onDEjD1pAEakvgP7YGyamVqf4CnkvwDzbCWGHpZljYusBv1bEgw2NDSgxPbv+zENwNOeUwiXSS30xeipm1+7Y=
+  alipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjW3Cke1kpVdwnBSlt3n2Sg6qKv2iTGjEfcBWahRQMQ+E/asPj2qUNUqkURHAzAURyJw9cUNVgO5O33f7WiWJPIh5qga/PxF7vVE8r7fQE4vlsHmAbI1l03BN2+r5LFq+dme5wxdYvU8UdJ+NpZdk7SyCtBeeixYxBDhGp/npyE1NdgW4mcuUTZAkFJihWsvw7eyJ4JyDBmzljEZEcBaJMHm2o7kPk/BJh24FtsSvZsRqxK7zWjn22dp3Dc0EHz/gLLw2s1zrR5QsVo0a90gtLvTcHz8hZEMpnNE1nbTraceEKPmsl42EeKzfHYDYqqKAa605uqh6s1ZdRk5CTKgPJwIDAQAB
+  notifyUrl: http://cu92a7.natappfree.cc/alipay/notify

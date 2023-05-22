@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--    命名空间，接口全限定名  namespace=绑定一个对应的mapper接口-->
+<mapper namespace="com.ai.th.mapper.RoleMapper">
+    <select id="findAll" resultType="Role">
+        select * from airole
+    </select>
+    <insert id="insert" parameterType="Role">
+        insert into airole values
+        (#{id},#{discription},#{name},#{rolekey})
+    </insert>
+    <update id="update" parameterType="Role">
+        update airole
+        <set>
+            <if test="discription != null">
+                discription = #{discription},
+            </if>
+            <if test="name != null">
+                name = #{name}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="removeById" parameterType="Role">
+        delete airole where id = #{id}
+    </delete>
+    <select id="findPage" resultType="Role">
+        select * from airole where name like concat('%',#{name},'%') limit #{pageNum},#{pageSize}
+    </select>
+    <select id="selectTotal" resultType="Integer">
+        select count(*) from airole
+    </select>
+</mapper>

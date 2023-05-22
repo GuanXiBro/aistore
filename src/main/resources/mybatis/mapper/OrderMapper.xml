@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--    命名空间，接口全限定名  namespace=绑定一个对应的mapper接口-->
+<mapper namespace="com.ai.th.mapper.OrderMapper">
+    <select id="findAll" resultType="Orders">
+        select * from orders
+    </select>
+    <insert id="insert" parameterType="Orders">
+        insert into orders values
+        (#{id},#{name},#{number},#{time},"待支付",#{sid},#{paymentTime},#{alipayNo},#{total})
+    </insert>
+    <delete id="removeById" parameterType="Orders">
+        delete from orders where id = #{id}
+    </delete>
+    <select id="findPage" resultType="Orders">
+        select * from orders where name like concat('%',#{name},'%') limit #{pageNum},#{pageSize}
+    </select>
+    <select id="selectTotal" resultType="Integer">
+        select count(*) from orders
+    </select>
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--    命名空间，接口全限定名  namespace=绑定一个对应的mapper接口-->
+<mapper namespace="com.ai.th.mapper.MenuMapper">
+    <select id="findAll" resultType="Menu">
+        select * from menu
+    </select>
+    <insert id="insert" parameterType="Menu">
+        insert into menu values
+        (#{id},#{name},#{discription},#{url},#{pid},#{pagepath})
+    </insert>
+    <update id="update" parameterType="Menu">
+        update menu set name = #{name},discription = #{discription},url = #{url},pid = #{pid},pagepath = #{pagepath}
+        where id = #{id}
+    </update>
+    <delete id="removeById" parameterType="Menu">
+        delete from menu where id = #{id}
+    </delete>
+    <select id="findPage" resultType="Menu">
+        select * from menu where name like concat('%',#{name},'%') limit #{pageNum},#{pageSize}
+    </select>
+    <select id="selectTotal" resultType="Integer">
+        select count(*) from menu
+    </select>
+</mapper>

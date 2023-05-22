@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--    命名空间，接口全限定名  namespace=绑定一个对应的mapper接口-->
+<mapper namespace="com.ai.th.mapper.StudentMapper">
+    <select id="findAll" resultType="Student">
+        select * from aistore.student
+    </select>
+    <insert id="insert" parameterType="Student">
+        insert into student
+        values (#{sid},#{account},#{password},#{sname},#{menurole},#{sex},#{birthday},#{college},#{address},#{email},#{tel})
+    </insert>
+    <update id="update" parameterType="Student">
+        update student
+        set account = #{account},sname = #{sname},menurole = #{menurole},sex = #{sex},birthday = #{birthday},college = #{college},address = #{address},email = #{email},tel = #{tel}
+        where sid = #{sid}
+    </update>
+    <delete id="removeById" parameterType="Student">
+        delete from student where sid = #{sid}
+    </delete>
+    <resultMap id="pageStudent" type="Student">
+        <result column="sid" property="sid" />
+        <result column="account" property="account" />
+        <result column="sname" property="sname" />
+        <result column="menurole" property="menurole" />
+        <result column="sex" property="sex" />
+        <result column="birthday" property="birthday" />
+        <result column="college" property="college" />
+        <result column="address" property="address" />
+        <result column="email" property="email" />
+        <result column="tel" property="tel" />
+        <collection property="competitions" javaType="java.util.ArrayList" ofType="Competition">
+            <result column="ename" property="ename" />
+            <result column="money" property="money" />
+        </collection>
+    </resultMap>
+    <select id="findPage" resultMap="pageStudent">
+        select student.*,competition.* from student
+        left join competition
+        on student.sid = competition.sponsor
+        <where>
+            <if test="account != null and account != ''">
+                and student.account like concat('%', #{account} ,'%')
+            </if>
+        </where>
+    </select>
+    <select id="selectTotal" resultType="Integer">
+        select count(*) from student
+    </select>
+    <select id="findByAccount" resultType="Student">
+        select * from student where account = #{account}
+    </select>
+</mapper>

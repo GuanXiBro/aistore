@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--    命名空间，接口全限定名  namespace=绑定一个对应的mapper接口-->
+<mapper namespace="com.ai.th.mapper.CompetitionMapper">
+    <select id="findAll" resultType="Competition">
+        select * from aistore.event
+    </select>
+    <insert id="insert" parameterType="Competition">
+        insert into competition
+        values (#{eid},#{ename},#{context},#{sponsor},#{buymoney},#{money},#{Rstime},#{Rctime},#{Cstime},#{Cftime},#{Resulttime})
+    </insert>
+    <update id="update" parameterType="Competition">
+        update competition
+        <set>
+            <if test="ename != null">
+                ename = #{ename},
+            </if>
+            <if test="context != null">
+                context = #{context},
+            </if>
+            <if test="sponsor != null">
+                sponsor = #{sponsor},
+            </if>
+            <if test="buymoney != null">
+                buymoney = #{buymoney},
+            </if>
+            <if test="money != null">
+                money = #{money},
+            </if>
+            <if test="Rstime != null">
+                Rstime = #{Rstime},
+            </if>
+            <if test="Rctime != null">
+                Rctime = #{Rctime},
+            </if>
+            <if test="Cstime != null">
+                Cstime = #{Cstime},
+            </if>
+            <if test="Cftime != null">
+                Cftime = #{Cftime},
+            </if>
+            <if test="Resulttime != null">
+                Resulttime = #{Resulttime}
+            </if>
+        </set>
+        where eid = #{eid}
+    </update>
+    <delete id="removeById" parameterType="Competition">
+        delete from competition where eid = #{eid}
+    </delete>
+    <select id="selectPage" resultType="Competition">
+        select * from competition where ename like concat('%',#{ename},'%') limit #{pageNum},#{pageSize}
+    </select>
+    <select id="selectTotal" resultType="Integer">
+        select count(*) from competition
+    </select>
+    <select id="findPage" resultType="Competition">
+        select competition.*,student.sname as company from competition
+        left join student
+        on competition.sponsor = student.sid
+        <where>
+            <if test="ename != null and ename != ''">
+                and ename like concat('%',#{ename},'%')
+            </if>
+        </where>
+    </select>
+</mapper>
